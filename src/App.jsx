@@ -17,8 +17,8 @@ function App() {
     <Sidebar/>
       <Routes>
         <Route path='/' element={<><Home/> <Newspopup/></>}/>
-        <Route path='/crops' element={<CropList/>}/>
-        <Route path='/crop:id' element={<><CropDetailsView/></>}/>
+        <Route path='/your-crops' element={<CropList/>}/>
+        <Route path='/your-crops:id' element={<><CropDetailsView/></>}/>
 
       </Routes>
       </BrowserRouter>

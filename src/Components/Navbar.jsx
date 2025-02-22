@@ -78,7 +78,7 @@ function Navbar() {
             </Link>
 
             <Link
-              to="/crops"
+              to="/your-crops"
               className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
                          flex items-center space-x-1 px-3 py-2 rounded-lg
                          relative group hover:translate-x-2 font-bold font-bold"
