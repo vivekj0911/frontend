@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function Chatbot() {
-
-    const API_URL = "https://prj-backend-git-main-prathameshkhandares-projects.vercel.app"
   const [messages, setMessages] = useState(() => {
     return JSON.parse(localStorage.getItem("chatMessages")) || [];
   });
@@ -31,7 +29,7 @@ export default function Chatbot() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/chat`, {
+      const response = await fetch("https://prj-backend-8kmv.onrender.com/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input }),
@@ -59,7 +57,7 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto bg-white shadow-lg rounded-lg p-4 flex flex-col">
+    <div className="w-full mt-36 max-w-lg mx-auto bg-white shadow-lg rounded-lg p-4 flex flex-col">
       <h2 className="text-green-500 text-xl font-bold text-center mb-2">Chatbot</h2>
 
       <div className="flex-1 overflow-y-auto max-h-80 p-2 border border-gray-300 rounded-md">
