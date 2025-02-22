@@ -47,7 +47,7 @@ function Navbar() {
       <div className="max-w-8xl mx-auto p-1">
         <div className="flex items-center justify-between px-8 py-5 bg-gray-200/30 backdrop-blur-[10px] rounded-full">
           
-          <div className="text-xl font-bold text-gray-800">KrushiSarthi</div>
+          <div className="text-xl font-bold text-gray-800">KrishiSarthi</div>
 
     
           <nav className="hidden lg:flex flex-grow justify-center items-center space-x-8">
@@ -55,10 +55,10 @@ function Navbar() {
               to="/homepage"
               className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
                          flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group hover:translate-x-2"
+                         relative group hover:translate-x-2 font-bold"
             >
              
-              <ArrowLeft className="h-3 w-4 transform rotate-[130deg] mr-1 absolute right-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
+              <ArrowLeft className="h-3 w-4 transform rotate-[130deg] mr-1 absolute right-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2 " />
               Home
           
               <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-0 absolute right-0 opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
@@ -68,7 +68,7 @@ function Navbar() {
               to="/forum"
               className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
                          flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group hover:translate-x-2"
+                         relative group hover:translate-x-2 font-bold"
             >
               News
               <ArrowLeft className="h-3 w-4  transform rotate-[130deg] group-hover:mr-8 absolute left-0 opacity-0 top-1/2 group-hover:opacity-100 transition-opacity duration-500 ease-in-out" />
@@ -81,10 +81,10 @@ function Navbar() {
               to="/chat"
               className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
                          flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group hover:translate-x-2"
+                         relative group hover:translate-x-2 font-bold font-bold"
             >
              
-              <ArrowLeft className="h-3 w-4 transform rotate-[130deg] group-hover:mr-2 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
+              <ArrowLeft className="h-3 w-4 transform rotate-[130deg] group-hover:mr-2 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2 " />
                Crops
            
               <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-0 absolute right-0 opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
@@ -93,7 +93,7 @@ function Navbar() {
               to="/about"
               className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
                          flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group hover:translate-x-2"
+                         relative group hover:translate-x-2 font-bold"
             >
              
               <ArrowLeft className="h-3 w-4 transform rotate-[130deg] group-hover:mr-2 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
@@ -105,7 +105,7 @@ function Navbar() {
               to="/blogs"
               className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
                          flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group hover:translate-x-2"
+                         relative group hover:translate-x-2 font-bold"
             >
              
               <ArrowLeft className="h-3 w-4 transform rotate-[130deg] group-hover:mr-2 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
