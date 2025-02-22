@@ -5,7 +5,7 @@ const Newspopup = ({ news }) => {
   const [selectedNews, setSelectedNews] = useState(null);
 
   if (!news || !Array.isArray(news) || news.length === 0) {
-    return <p className="ml-64 mt-10 text-red-500">News data is missing or invalid.</p>;
+    return <p className="ml-64 mt-10 text-red-500"></p>;
   }
 
   return (
