@@ -1,11 +1,13 @@
 import React from "react";
 import { FaSeedling, FaTractor, FaShoppingCart, FaMoneyBillWave } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import {Newspopup} from "../Components/CompIndex";
 
 const features = [
-  { icon: <FaSeedling size={30} />, title: "Add Crop", description: "आप नई फसल जोड़ सकते हैं", bgColor: "bg-yellow-200" },
-  { icon: <FaTractor size={30} />, title: "Past Crops", description: "पहले उगाई गई फसलों का इतिहास देखें", bgColor: "bg-blue-200" },
-  { icon: <FaShoppingCart size={30} />, title: "Market Live Rate", description: "सोयाबीन के बाजार भाव की लाइव जानकारी", bgColor: "bg-red-200" },
-  { icon: <FaMoneyBillWave size={30} />, title: "Total Expenses", description: "खेती में कुल खर्च का ब्यौरा", bgColor: "bg-green-200" },
+  { icon: <FaSeedling size={30} />, title: "Add Crop", description: "आप नई फसल जोड़ सकते हैं", bgColor: "bg-yellow-200", route: "/add-crop" },
+  { icon: <FaTractor size={30} />, title: "Past Crops", description: "पहले उगाई गई फसलों का इतिहास देखें", bgColor: "bg-blue-200", route: "/past-crops" },
+  { icon: <FaShoppingCart size={30} />, title: "Market Live Rate", description: "सोयाबीन के बाजार भाव की लाइव जानकारी", bgColor: "bg-red-200", route: "/market-rate" },
+  { icon: <FaMoneyBillWave size={30} />, title: "Total Expenses", description: "खेती में कुल खर्च का ब्यौरा", bgColor: "bg-green-200", route: "/total-expenses" },
 ];
 
 const news = [
@@ -17,31 +19,30 @@ const news = [
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="p-6 ml-64 mt-20"> 
-      <div className="grid grid-cols-2 gap-6">
-        {features.map((feature, index) => (
-          <div key={index} className={`${feature.bgColor} border border-gray-300 p-6 rounded-lg shadow-md hover:bg-green-500 hover:text-white transition duration-300 cursor-pointer relative`}> 
-            <div className="absolute top-3 left-3 text-gray-600">{feature.icon}</div>
-            <h3 className="text-lg font-semibold text-center mt-6">{feature.title}</h3>
-            <p className="text-sm text-center mt-2">{feature.description}</p>
-          </div>
-        ))}
+    <>
+      <div className="p-6 ml-64 mt-20"> 
+        <div className="grid grid-cols-2 gap-6">
+          {features.map((feature, index) => (
+            <div 
+              key={index} 
+              className={`${feature.bgColor} border border-gray-300 p-6 rounded-lg shadow-md hover:bg-green-500 hover:text-white transition duration-300 cursor-pointer relative`} 
+              onClick={() => navigate(feature.route)}
+            > 
+              <div className="absolute top-3 left-3 text-gray-600">{feature.icon}</div>
+              <h3 className="text-lg font-semibold text-center mt-6">{feature.title}</h3>
+              <p className="text-sm text-center mt-2">{feature.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="mt-10">
-        {news.map((item, index) => (
-          <div key={index} className="flex items-center gap-4 border border-gray-300 p-4 rounded-lg shadow-md mb-4">
-            <img src={item.image} alt="News" className="w-24 h-24 rounded-lg" />
-            <div>
-              <h3 className="text-lg font-semibold">{item.title}</h3>
-              <p className="text-sm text-gray-600">{item.description}</p>
-            </div>
-          </div>
-        ))}
-        <button className="bg-green-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-green-600 cursor-pointer">और देखें</button>
-      </div>
-    </div>
+      {/* News Section */}
+      <Newspopup news={news} />
+      
+    </>
   );
 };
 
