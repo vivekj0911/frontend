@@ -1,55 +1,59 @@
-"use client"
+"use client";
+import axios from "axios";
 
-import { useState } from "react"
-import { Leaf, Calendar, Sprout, BarChart3, Loader2 } from "lucide-react"
+import { useState } from "react";
+import { Leaf, Calendar, Sprout, BarChart3, Loader2 } from "lucide-react";
 
 export default function AddCropForm() {
-  const [isLoading, setIsLoading] = useState(false)
+  const API_URL = "https://prj-backend-8kmv.onrender.com";
+  const token = localStorage.getItem("token");
+  console.log(token);
+
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     cropName: "",
-    variety: "",
-    plantingDate: "",
-    harvestDate: "",
+
     expectedYield: "",
-  })
+  });
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
+    e.preventDefault();
+    setIsLoading(true);
 
     try {
-      // Add your API call here
-      // await fetch('/api/crops', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // })
+      const response = await axios.post(`${API_URL}/crops`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjljNjU5Y2VmMGI3NTg0OGVmNWVlNyIsImlhdCI6MTc0MDIyOTI5NSwiZXhwIjoxNzQyODIxMjk1fQ.4LedzQ3ybPtHJHWJxWlniXDzojavaK2tPldUXQP5NpY`,
+        },
+      });
 
-      console.log("Form submitted:", formData)
+      console.log("Crop added successfully:", response.data);
+
+      // Reset form after successful submission
       setFormData({
         cropName: "",
-        variety: "",
-        plantingDate: "",
-        harvestDate: "",
-        expectedYield: "",
-      })
 
-      // Add your success notification here
+        expectedYield: "",
+      });
+
+      // Add a success notification
+      alert("Crop added successfully!");
     } catch (error) {
-      console.error("Error:", error)
-      // Add your error notification here
+      console.error("Error:", error.response?.data || error.message);
+      alert("Error adding crop. Please try again.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50 p-6 pt-17 pl-20  flex items-center justify-center">
@@ -81,57 +85,6 @@ export default function AddCropForm() {
                 className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
                 placeholder="Enter crop name"
               />
-            </div>
-
-            {/* Variety */}
-            <div className="space-y-2">
-              <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                <Sprout className="h-4 w-4 text-emerald-500" />
-                Variety
-              </label>
-              <input
-                type="text"
-                name="variety"
-                value={formData.variety}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
-                placeholder="Enter crop variety"
-              />
-            </div>
-
-            {/* Dates Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Planting Date */}
-              <div className="space-y-2">
-                <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                  <Calendar className="h-4 w-4 text-emerald-500" />
-                  Planting Date
-                </label>
-                <input
-                  type="date"
-                  name="plantingDate"
-                  value={formData.plantingDate}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
-                />
-              </div>
-
-              {/* Harvest Date */}
-              <div className="space-y-2">
-                <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                  <Calendar className="h-4 w-4 text-emerald-500" />
-                  Expected Harvest Date
-                </label>
-                <input
-                  type="date"
-                  name="harvestDate"
-                  value={formData.harvestDate}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 outline-none"
-                />
-              </div>
             </div>
 
             {/* Expected Yield */}
@@ -176,6 +129,5 @@ export default function AddCropForm() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-
