@@ -43,7 +43,7 @@ function Sidebar() {
                   }`}
                 >
                   <Link
-                    to="/home"
+                    to="/"
                     className="flex items-center gap-2"
                     onClick={() => setIsSelected("Home")}
                   >
@@ -59,7 +59,7 @@ function Sidebar() {
                   }`}
                 >
                   <Link
-                    to="/Crops"
+                    to="/your-crops"
                     className=" flex items-center gap-2"
                     onClick={() => setIsSelected("Forum")}
                   >
@@ -75,12 +75,12 @@ function Sidebar() {
                   }`}
                 >
                   <Link
-                    to="/chat"
+                    to="/news"
                     className="flex items-center gap-2"
                     onClick={() => setIsSelected("Chat")}
                   >
                     <FaEnvelope className="text-2xl" />
-                    <span className="text-lg">Aboutus</span>
+                    <span className="text-lg">news</span>
                   </Link>
                 </li>
 
@@ -91,7 +91,7 @@ function Sidebar() {
                   }`}
                 >
                   <Link
-                    to="/adminblog"
+                    to="/blog"
                     className="flex items-center gap-2"
                     onClick={() => setIsSelected("Blog")}
                   >
