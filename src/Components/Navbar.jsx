@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Importing Link from React Router
-import { ArrowRight, ArrowLeft, Menu, X ,ChevronDown,User} from "lucide-react"; // Importing ArrowLeft
+import { ArrowRight, ArrowLeft, Menu, X ,ChevronDown,User} from "lucide-react"; 
 import { motion } from "framer-motion";
 
 // import useAuthStore from "../Store/authStore";
