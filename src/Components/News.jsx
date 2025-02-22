@@ -7,7 +7,7 @@ import image3 from "../assets/images/third.jpeg";
 import image4 from "../assets/images/fouth.jpeg";
 import image5 from "../assets/images/fifth.jpeg";
 
-const News = () => {
+function News() {
   const news = [
     { image: image1, title: "खेती में नई तकनीकों का आगमन", description: "खेती में नई तकनीकों का आगमन कृषि क्षेत्र में क्रांतिकारी बदलाव ला रहा है..." },
     { image: image2, title: "सरकार ने नई सब्सिडी योजना की घोषणा की", description: "किसानों के लिए फायदेमंद योजना शुरू।" },

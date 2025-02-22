@@ -12,8 +12,8 @@ import image5 from "../assets/images/fifth.jpeg";
 
 const features = [
   { icon: <FaSeedling size={30} />, title: "Add Crop", description: "आप नई फसल जोड़ सकते हैं", bgColor: "bg-yellow-200", route: "/add-crop" },
-  { icon: <FaTractor size={30} />, title: "Your Crops", description: "पहले उगाई गई फसलों का इतिहास देखें", bgColor: "bg-blue-200", route: "/your-crops" },
-  { icon: <FaShoppingCart size={30} />, title: "Market Live Rate", description: "सोयाबीन के बाजार भाव की लाइव जानकारी", bgColor: "bg-red-200", route: "popup" }, // Route changed to "popup"
+  { icon: <FaTractor size={30} />, title: "your Crops", description: "पहले उगाई गई फसलों का इतिहास देखें", bgColor: "bg-blue-200", route: "/your-crops" },
+  { icon: <FaShoppingCart size={30} />, title: "Market Live Rate", description: "सोयाबीन के बाजार भाव की लाइव जानकारी", bgColor: "bg-red-200", route: "popup" }, 
   { icon: <FaMoneyBillWave size={30} />, title: "Total Expenses", description: "खेती में कुल खर्च का ब्यौरा", bgColor: "bg-green-200", route: "/total-expenses" },
 ];
 

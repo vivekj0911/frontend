@@ -4,7 +4,7 @@ import featuresImg from '../assets/images/features.jpeg';
 import howToUseImg from '../assets/images/howtouse.jpeg';
 import faqImg from '../assets/images/faq.jpeg';
 
-const UserGuide = () => {
+function UserGuide(){
     return (
         <div className="p-8 mt-20 ml-48"> 
             {/* Introduction */}
