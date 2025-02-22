@@ -59,7 +59,7 @@ function Sidebar() {
                   }`}
                 >
                   <Link
-                    to="/forum"
+                    to="/Crops"
                     className=" flex items-center gap-2"
                     onClick={() => setIsSelected("Forum")}
                   >
