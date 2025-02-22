@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
  function Signup() {
-    const API_URL = "https://prj-backend-git-main-prathameshkhandares-projects.vercel.app"
+    const API_URL = "https://prj-backend-r3nqzm3oa-prathameshkhandares-projects.vercel.app"
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [registrationData, setRegistrationData] = useState({

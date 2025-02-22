@@ -1,127 +1,131 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const EditableField = ({ label, value, onSave }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedValue, setEditedValue] = useState(value);
-  const [isSaving, setIsSaving] = useState(false);
+const CropDetails = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const crop = location.state?.crop;
+  const [showModal, setShowModal] = useState(false);
+  const [selectedActivity, setSelectedActivity] = useState("");
+  const [activities, setActivities] = useState([]);
 
-  const handleSave = async () => {
-    setIsSaving(true);
-    await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate API call
-    onSave(editedValue);
-    setIsSaving(false);
-    setIsEditing(false);
+  useEffect(() => {
+    const fetchActivities = async () => {
+      try {
+        if (!crop?._id) return;
+  
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `https://prj-backend-git-main-prathameshkhandares-projects.vercel.app/activities/${crop._id}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+  
+        console.log("API Response:", response.data); // Debugging
+  
+        if (response.data) {
+          const ALLOWED_ACTIVITIES = [
+            "sowing",
+            "fertilization",
+            "pesticideApplication",
+            "weeding",
+            "harvesting",
+          ];
+  
+          // Get activities that are NOT empty
+          const activitiesList = ALLOWED_ACTIVITIES.filter(
+            (key) => response.data[key] && response.data[key].length > 0
+          );
+  
+          console.log("Extracted Activity Keys:", activitiesList); // Debugging
+  
+          const activityOptions = activitiesList.map((key) => ({
+            label: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize first letter
+            value: key,
+          }));
+  
+          console.log("Filtered Activities:", activityOptions); // Debugging
+  
+          setActivities(activityOptions);
+        }
+      } catch (error) {
+        console.error("Failed to fetch activities:", error);
+      }
+    };
+  
+    fetchActivities();
+  }, [crop]);
+  
+  
+
+  const handleActivitySelect = () => {
+    if (!selectedActivity) return;
+    navigate(`/update-activity/${crop._id}/${selectedActivity}`, {
+      state: { crop, selectedActivity }, // Pass selectedActivity explicitly
+    });
   };
 
-  const handleCancel = () => {
-    setEditedValue(value);
-    setIsEditing(false);
-  };
+  if (!crop) {
+    return <p className="text-center mt-10 text-lg text-red-600">Crop details not found.</p>;
+  }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4 relative group transition-all hover:shadow-md">
-      <div className="flex justify-between items-start mb-2">
-        <label className="text-sm font-medium">{label}</label>
-        {!isEditing && (
-          <button
-            className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
-            onClick={() => setIsEditing(true)}
-          >
-            ✏️
-          </button>
-        )}
+    <div className="p-10">
+      <button className="mb-4 px-4 py-2 bg-gray-700 text-white rounded" onClick={() => navigate(-1)}>
+        ← Back
+      </button>
+
+      <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-6 max-w-3xl mx-auto">
+        <img src={crop.image || "https://via.placeholder.com/300"} alt={crop.cropName} className="w-full h-60 object-cover rounded-lg" />
+        <h1 className="text-3xl font-bold text-gray-800 mt-4">{crop.cropName}</h1>
+        <p className="text-gray-600 mt-2">🌍 Location: {crop.location || "Unknown"}</p>
+        <p className="text-gray-600">📅 Harvest Date: {crop.harvestDate || "Not available"}</p>
+        <p className="text-gray-600">💰 Expected Yield: {crop.expectedYield || "Unknown"}</p>
+
+        {/* Update Button */}
+        <button
+          className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg"
+          onClick={() => setShowModal(true)}
+        >
+          Update Activity
+        </button>
       </div>
-      {isEditing ? (
-        <div className="space-y-3">
-          {label === "Description" ? (
-            <textarea
-              value={editedValue}
-              onChange={(e) => setEditedValue(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-lg resize-none"
-            />
-          ) : (
-            <input
-              value={editedValue}
-              onChange={(e) => setEditedValue(e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-lg"
-            />
-          )}
-          <div className="flex gap-2 justify-end">
-            <button
-              className="bg-green-500 text-white px-4 py-2 rounded-lg"
-              onClick={handleSave}
-              disabled={isSaving}
+
+      {/* Modal for Activity Selection */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-xl font-bold mb-4">Select Activity to Update</h2>
+            <select
+              className="w-full p-2 border rounded-lg mb-4"
+              onChange={(e) => setSelectedActivity(e.target.value)}
+              value={selectedActivity}
             >
-              {isSaving ? "Saving..." : "Save"}
-            </button>
-            <button
-              className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg"
-              onClick={handleCancel}
-              disabled={isSaving}
-            >
-              Cancel
-            </button>
+              <option value="">-- Select an Activity --</option>
+              {activities.length > 0 ? (
+                activities.map((activity) => (
+                  <option key={activity.value} value={activity.value}>
+                    {activity.label}
+                  </option>
+                ))
+              ) : (
+                <option disabled>No activities available</option>
+              )}
+            </select>
+
+            <div className="flex justify-end gap-3">
+              <button className="px-4 py-2 bg-gray-400 text-white rounded" onClick={() => setShowModal(false)}>
+                Cancel
+              </button>
+              <button className="px-4 py-2 bg-green-600 text-white rounded" onClick={handleActivitySelect} disabled={!selectedActivity}>
+                Proceed
+              </button>
+            </div>
           </div>
         </div>
-      ) : (
-        <p className="text-sm text-gray-600">{value}</p>
       )}
     </div>
   );
 };
 
-const CropDetailsView = ({ crop, onUpdate, onBack }) => {
-  return (
-    <div className="p-20 pt-25 pl-45" >
-      <button
-        className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg mb-6"
-        onClick={onBack}
-      >
-        ← Back to Crops
-      </button>
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">{crop.name}</h1>
-      <div className="aspect-[21/9] relative rounded-lg overflow-hidden mb-8">
-        <img src={crop.image} alt={crop.name} className="w-full h-full object-cover" />
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <EditableField
-          label="Fertilization"
-          value={crop.fertilization}
-          onSave={(value) => onUpdate("fertilization", value)}
-        />
-        <EditableField
-          label="Pesticides"
-          value={crop.pesticides}
-          onSave={(value) => onUpdate("pesticides", value)}
-        />
-        <EditableField
-          label="Sowing Time"
-          value={crop.sowingTime}
-          onSave={(value) => onUpdate("sowingTime", value)}
-        />
-        <EditableField
-          label="Harvest Time"
-          value={crop.harvestTime}
-          onSave={(value) => onUpdate("harvestTime", value)}
-        />
-        <EditableField
-          label="Watering Schedule"
-          value={crop.wateringSchedule}
-          onSave={(value) => onUpdate("wateringSchedule", value)}
-        />
-        <EditableField
-          label="Soil Type"
-          value={crop.soilType}
-          onSave={(value) => onUpdate("soilType", value)}
-        />
-        <EditableField
-          label="Description"
-          value={crop.description}
-          onSave={(value) => onUpdate("description", value)}
-        />
-      </div>
-    </div>
-  );
-};
-
-export default CropDetailsView;
+export default CropDetails;

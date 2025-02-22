@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaHome, FaComments, FaEnvelope, FaBook, FaSignOutAlt, FaBars } from "react-icons/fa";
+import { FaHome, FaComments, FaEnvelope, FaBook, FaSignOutAlt, FaBars, FaRobot } from "react-icons/fa"; // Added FaRobot
 
 function Sidebar() {
   const [isSelected, setIsSelected] = useState("Home");
@@ -77,10 +77,10 @@ function Sidebar() {
                   <Link
                     to="/news"
                     className="flex items-center gap-2"
-                    onClick={() => setIsSelected("Chat")}
+                    onClick={() => setIsSelected("news")}
                   >
                     <FaEnvelope className="text-2xl" />
-                    <span className="text-lg">news</span>
+                    <span className="text-lg">News</span>
                   </Link>
                 </li>
 
@@ -97,6 +97,22 @@ function Sidebar() {
                   >
                     <FaBook className="text-2xl" />
                     <span className="text-lg">Blogs</span>
+                  </Link>
+                </li>
+
+                {/* Chatbot */}
+                <li
+                  className={`mt-8 flex items-center gap-4 ${
+                    isSelected === "Chatbot" ? "font-bold" : ""
+                  }`}
+                >
+                  <Link
+                    to="/chatbot"
+                    className="flex items-center gap-2"
+                    onClick={() => setIsSelected("Chatbot")}
+                  >
+                    <FaRobot className="text-2xl" />
+                    <span className="text-lg">Chatbot</span>
                   </Link>
                 </li>
 

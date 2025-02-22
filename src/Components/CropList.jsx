@@ -16,9 +16,9 @@ const CropList = () => {
           return;
         }
 
-        const response = await axios.get("https://prj-backend-git-main-prathameshkhandares-projects.vercel.app/crops", {
+        const response = await axios.get("https://prj-backend-8kmv.onrender.com/crops", {
           headers: {
-            Authorization: `Bearer ${token}`, // Attach token to headers
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjljNjU5Y2VmMGI3NTg0OGVmNWVlNyIsImlhdCI6MTc0MDI1MDE0MCwiZXhwIjoxNzQyODQyMTQwfQ.3iWnF7K5Tgzx2UC5DobHOcQ8fk48-Gt6SFCnp-ALDGg', // Attach token to headers
           },
         });
 
