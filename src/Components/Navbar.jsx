@@ -135,7 +135,7 @@ function Navbar() {
               to="/login"
               className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
                          flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group hover:translate-x-2"
+                         relative group hover:translate-x-2 font-bold"
             >
               <ArrowLeft className="h-3 w-4 transform rotate-[130deg] group-hover:mr-2 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
               Login
