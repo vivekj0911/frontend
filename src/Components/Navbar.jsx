@@ -3,14 +3,14 @@ import { Link, useNavigate } from "react-router-dom"; // Importing Link from Rea
 import { ArrowRight, ArrowLeft, Menu, X ,ChevronDown,User} from "lucide-react"; 
 import { motion } from "framer-motion";
 
-// import useAuthStore from "../Store/authStore";
+import useAuthStore from "../Store/authStore";
 
 function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [islogin,setIslogin] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -20,26 +20,27 @@ function Navbar() {
     setIsDropdownOpen(!isDropdownOpen);
   }
 
-    // useEffect(()=>{
-    //   checkLoginStatus();
-    // },[]);
+    useEffect(()=>{
+      checkLoginStatus();
+    },[]);
 
-//   const checkLoginStatus = async () => {
-//     const token = localStorage.getItem('token');
-//     setIslogin(!!token); 
-//     console.log(token)
-//   }
+  const checkLoginStatus = async () => {
+    const token = localStorage.getItem('token');
+    console.log("token check",token)
+    setIslogin(!!token); 
+   
+  }
   
  
 
-//   const logout = useAuthStore((state) => state.logout);
+  const logout = useAuthStore((state) => state.logout);
 
-//   const handleLogout =()=>{
-//    logout();
-//     setIslogin(false);
-//     navigate('/homepage')
+  const handleLogout =()=>{
+   logout();
+    setIslogin(false);
+    navigate('/')
     
-//   }
+  }
   
 
   return (
@@ -132,7 +133,7 @@ function Navbar() {
               <>
               
               <Link
-  to="/login"
+  to="/signin"
   className="text-sm font-black text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
              flex items-center space-x-1 px-3 py-2 rounded-lg
              relative group hover:translate-x-2"
@@ -184,7 +185,7 @@ function Navbar() {
                       Settings
                     </Link>
                     <button
-                    //   onClick={handleLogout} 
+                      onClick={handleLogout} 
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       Logout
@@ -214,41 +215,41 @@ function Navbar() {
                 <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1" />
               </Link>
               <Link
-                to="/forum"
+                to="/news"
                 className="text-sm text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
                            flex items-center space-x-1 px-3 py-2 rounded-lg hover:translate-x-2"
               >
                 <ArrowLeft className="h-3 w-4 transform rotate-[130deg] ml-1 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-                Forum
+                news
                 <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1" />
               </Link>
-              <Link
-                to="/chat"
-                className="text-sm text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
-                           flex items-center space-x-1 px-3 py-2 rounded-lg hover:translate-x-2"
-              >
-                <ArrowLeft className="h-3 w-4 transform rotate-[130deg] ml-1 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-                Stranger Chat
-                <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1" />
-              </Link>
-
-              <Link
-                to="/about"
-                className="text-sm text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
-                           flex items-center space-x-1 px-3 py-2 rounded-lg hover:translate-x-2"
-              >
-                <ArrowLeft className="h-3 w-4 transform rotate-[130deg] ml-1 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-                About us 
-                <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1" />
-              </Link>
-
               <Link
                 to="/blogs"
                 className="text-sm text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
                            flex items-center space-x-1 px-3 py-2 rounded-lg hover:translate-x-2"
               >
                 <ArrowLeft className="h-3 w-4 transform rotate-[130deg] ml-1 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
+                Blogs
+                <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1" />
+              </Link>
+
+              <Link
+                to="/about-us"
+                className="text-sm text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
+                           flex items-center space-x-1 px-3 py-2 rounded-lg hover:translate-x-2"
+              >
+                <ArrowLeft className="h-3 w-4 transform rotate-[130deg] ml-1 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
                 About us 
+                <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1" />
+              </Link>
+
+              <Link
+                to="/crops"
+                className="text-sm text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
+                           flex items-center space-x-1 px-3 py-2 rounded-lg hover:translate-x-2"
+              >
+                <ArrowLeft className="h-3 w-4 transform rotate-[130deg] ml-1 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
+                Crops
                 <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1" />
               </Link>
             </nav>

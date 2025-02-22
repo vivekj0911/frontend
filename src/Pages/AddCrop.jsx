@@ -32,7 +32,7 @@ export default function AddCropForm() {
       const response = await axios.post(`${API_URL}/crops`, formData, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjljNjU5Y2VmMGI3NTg0OGVmNWVlNyIsImlhdCI6MTc0MDIyOTI5NSwiZXhwIjoxNzQyODIxMjk1fQ.4LedzQ3ybPtHJHWJxWlniXDzojavaK2tPldUXQP5NpY`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
