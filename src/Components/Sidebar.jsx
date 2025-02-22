@@ -28,7 +28,7 @@ function Sidebar() {
 
       {/* Sidebar */}
       <div
-        className={`sidebar-container w-40 fixed top-20 bottom-0 bg-blue-950 p-4 ${
+        className={`sidebar-container w-40 fixed top-20 bottom-0 bg-green-500 p-4 ${
           isOpen ? "block" : "hidden"
         } sm:block`}
       >
@@ -64,7 +64,7 @@ function Sidebar() {
                     onClick={() => setIsSelected("Forum")}
                   >
                     <FaComments className="text-2xl" />
-                    <span className="text-lg">Forum</span>
+                    <span className="text-lg">Crops</span>
                   </Link>
                 </li>
 
@@ -80,7 +80,7 @@ function Sidebar() {
                     onClick={() => setIsSelected("Chat")}
                   >
                     <FaEnvelope className="text-2xl" />
-                    <span className="text-lg">Chat</span>
+                    <span className="text-lg">Aboutus</span>
                   </Link>
                 </li>
 
@@ -96,7 +96,7 @@ function Sidebar() {
                     onClick={() => setIsSelected("Blog")}
                   >
                     <FaBook className="text-2xl" />
-                    <span className="text-lg">Blog</span>
+                    <span className="text-lg">Blogs</span>
                   </Link>
                 </li>
 
