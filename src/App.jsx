@@ -1,7 +1,7 @@
 
 import './index.css'
 import {BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./Pages/PageIndex"
+import { Home ,Chatbot} from "./Pages/PageIndex"
 import CropList from "./Components/CropList"; 
 import {Navbar,Sidebar,Newspopup,Signin,Signup} from "./Components/CompIndex"
 import CropDetailsView from './Components/CropDetailsView'; 
@@ -25,6 +25,7 @@ function App() {
         <Route path='/your-crops:id' element={<><CropDetailsView/></>}/>
         <Route  path='/signin' element={<Signin/>}/>
         <Route path='/signup' element={<Signup/>}/>
+        <Route path='/chatbot' element={<Chatbot/>}/>
 
       </Routes>
       </BrowserRouter>

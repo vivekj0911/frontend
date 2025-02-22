@@ -5,7 +5,7 @@ const Newspopup = ({ news }) => {
   const [selectedNews, setSelectedNews] = useState(null);
 
   if (!news || !Array.isArray(news) || news.length === 0) {
-    return <p className="ml-64 mt-10 text-red-500">News data is missing or invalid.</p>;
+    return <p className="ml-64 mt-10 text-red-500"></p>;
   }
 
   return (
@@ -56,19 +56,34 @@ const Newspopup = ({ news }) => {
 
       {/* Modal for full news */}
       {selectedNews && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 backdrop-blur-sm">
-          <div className="bg-white p-8 rounded-2xl shadow-2xl w-[550px] max-h-[90vh] overflow-auto">
-            <h3 className="text-2xl font-bold">{selectedNews.title}</h3>
-            <img src={selectedNews.image} alt="News" className="w-full h-48 object-cover mt-4 rounded-xl" />
-            <p className="text-gray-700 mt-4 text-lg leading-relaxed">{selectedNews.description}</p>
+        <div className="fixed inset-0 flex items-center justify-center bg-transparent bg-opacity-40 backdrop-blur-md">
+          <div className="bg-white p-10 rounded-3xl shadow-2xl w-[750px] max-h-[75vh] overflow-hidden flex flex-col">
+            {/* Title */}
+            <h3 className="text-3xl font-extrabold text-gray-900">{selectedNews.title}</h3>
+
+            {/* Image */}
+            <img
+              src={selectedNews.image}
+              alt="News"
+              className="w-full h-55 object-contain mt-5 rounded-xl shadow-md bg-gray-200"
+            />
+
+
+            {/* Description (Scrollable) */}
+            <div className="mt-5 flex-1 overflow-y-auto max-h-60 pr-3 text-lg text-gray-700 leading-relaxed">
+              {selectedNews.description}
+            </div>
+
+            {/* Close Button */}
             <button
-              className="mt-6 bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 cursor-pointer"
+              className="mt-6 bg-red-500 text-white px-8 py-3 rounded-lg hover:bg-red-600 transition shadow-md text-lg font-semibold"
               onClick={() => setSelectedNews(null)}
             >
-              बंद करें
+              ✖ बंद करें
             </button>
           </div>
         </div>
+
       )}
     </div>
   );

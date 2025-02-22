@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Leaf, Calendar, Sprout, BarChart3, Loader2 } from "lucide-react";
 
 export default function AddCropForm() {
-  const API_URL = "https://prj-backend-8kmv.onrender.com";
+  const API_URL = "https://prj-backend-git-main-prathameshkhandares-projects.vercel.app";
   const token = localStorage.getItem("token");
   console.log(token);
 
