@@ -12,7 +12,7 @@ const Newspopup = ({ news }) => {
     <div className="flex ml-64 mt-10 gap-8">
       {/* Left Section - News List */}
       <div className="w-1/2">
-        {news.map((item, index) => (
+        {news.map((item, index) => (  
           <div
             key={index}
             className="flex items-center gap-4 border border-gray-300 p-4 rounded-lg shadow-md mb-4 cursor-pointer hover:bg-gray-200 transition"
