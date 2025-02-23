@@ -1,98 +1,87 @@
-import React, { useState } from "react";
-import CropDetailsView from "./CropDetailsView";
-
-const crops = [
-  {
-    id: 1,
-    name: "Wheat",
-    image: "https://tse3.mm.bing.net/th?id=OIP.a5ZN-gyrlqtXXqei_TstFwHaE8&pid=Api&P=0&h=180",
-    fertilization: "NPK 20-20-20, Organic manure",
-    pesticides: "Neem oil, Pyrethrin",
-    sowingTime: "October-November",
-    harvestTime: "March-April",
-    wateringSchedule: "Every 15-20 days",
-    soilType: "Loamy soil",
-    description: "Hardy winter crop, requires moderate water and full sun exposure.",
-  },
-  {
-    id: 2,
-    name: "Rice",
-    image: "https://tse3.mm.bing.net/th?id=OIP.a5ZN-gyrlqtXXqei_TstFwHaE8&pid=Api&P=0&h=180",
-    fertilization: "Urea, DAP",
-    pesticides: "Carbofuran, Chlorpyrifos",
-    sowingTime: "June-July",
-    harvestTime: "November-December",
-    wateringSchedule: "Standing water",
-    soilType: "Clay soil",
-    description: "Requires standing water and warm climate for optimal growth.",
-  },
-  {
-    id: 3,
-    name: "Cotton",
-    image: "https://tse3.mm.bing.net/th?id=OIP.a5ZN-gyrlqtXXqei_TstFwHaE8&pid=Api&P=0&h=180",
-    fertilization: "NPK 10-20-10",
-    pesticides: "Bt spray, Spinosad",
-    sowingTime: "March-April",
-    harvestTime: "October-November",
-    wateringSchedule: "Every 20-25 days",
-    soilType: "Black soil",
-    description: "Requires well-drained soil and warm climate.",
-  },
-  {
-    id: 4,
-    name: "Corn",
-    image: "https://tse3.mm.bing.net/th?id=OIP.a5ZN-gyrlqtXXqei_TstFwHaE8&pid=Api&P=0&h=180",
-    fertilization: "NPK 15-15-15",
-    pesticides: "Bacillus thuringiensis",
-    sowingTime: "April-May",
-    harvestTime: "August-September",
-    wateringSchedule: "Every 7-10 days",
-    soilType: "Well-drained loamy soil",
-    description: "Fast-growing summer crop with high water requirements.",
-  },
-];
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Loader2 } from "lucide-react";
 
 const CropList = () => {
-  const [selectedCrop, setSelectedCrop] = useState(null);
+  const [crops, setCrops] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  if (selectedCrop) {
+  useEffect(() => {
+    const fetchCrops = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          setError("User not authenticated");
+          setLoading(false);
+          return;
+        }
+
+        const response = await axios.get(
+          "https://prj-backend-git-main-prathameshkhandares-projects.vercel.app/crops",
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        setCrops(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError("Failed to load crops.");
+        setLoading(false);
+      }
+    };
+
+    fetchCrops();
+  }, []);
+
+  if (loading) {
     return (
-      <CropDetailsView
-        crop={selectedCrop}
-        onUpdate={(field, value) => {
-          const updatedCrops = crops.map((crop) =>
-            crop.id === selectedCrop.id ? { ...crop, [field]: value } : crop
-          );
-          setSelectedCrop({ ...selectedCrop, [field]: value });
-        }}
-        onBack={() => setSelectedCrop(null)}
-      />
+      <div className="flex items-center justify-center h-screen">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-red-600">{error}</p>
+      </div>
     );
   }
 
   return (
-    <div className="p-32 pl-56">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">🌱 Crop Management Dashboard</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <div className="container mx-auto p-26 pl-49">
+      <h1 className="text-3xl font-bold mb-8 flex items-center gap-2">
+        <span>🌱</span>
+        <span>Crop Management Dashboard</span>
+      </h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {crops.map((crop) => (
           <div
-            key={crop.id}
-            className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl"
+            key={crop._id}
+            className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
           >
-            <div className="relative">
-              <img src={crop.image} alt={crop.name} className="w-full h-48 object-cover" />
+            <div className="p-0">
+              <img
+                src={crop.image || "/placeholder.svg?height=200&width=400"}
+                alt={crop.cropName}
+                className="w-full h-48 object-cover"
+              />
             </div>
-            <div className="p-5 text-center">
-              <h2 className="text-xl font-bold text-gray-800">{crop.name}</h2>
+            <div className="p-4 text-center">
+              <h2 className="text-lg font-bold">{crop.cropName}</h2>
             </div>
-            <div className="p-5 pt-0 flex gap-3">
+            <div className="p-4 pt-0 flex gap-3">
               <button
-                className="bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold px-4 py-2 rounded-lg w-1/2 transition hover:opacity-80"
-                onClick={() => setSelectedCrop(crop)}
+                className="bg-green-500 text-white py-2 px-4 rounded w-full hover:bg-blue-600 transition"
+                onClick={() => navigate(`/crop-details/${crop._id}`, { state: {crop } })}
               >
                 View Details
               </button>
-              <button className="border border-gray-400 text-gray-700 font-semibold px-4 py-2 rounded-lg w-1/2 transition hover:bg-gray-100">
+              <button className="border border-gray-500 text-gray-700 py-2 px-4 rounded w-full hover:bg-gray-100 transition">
                 Update
               </button>
             </div>
