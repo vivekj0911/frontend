@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaSeedling, FaTractor, FaShoppingCart, FaMoneyBillWave } from "react-icons/fa";
+import { FaSeedling, FaTractor, FaShoppingCart, FaMoneyBillWave, FaShoppingBag } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Newspopup } from "../Components/CompIndex";
 import CropMarketPopup from "../Components/CropMarketPopup"; // Import popup component
@@ -12,8 +12,13 @@ import image5 from "../assets/images/fifth.jpeg";
 
 const features = [
   { icon: <FaSeedling size={30} />, title: "Add Crop", description: "आप नई फसल जोड़ सकते हैं", bgColor: "bg-yellow-200", route: "/add-crop" },
-  { icon: <FaTractor size={30} />, title: "your Crops", description: "पहले उगाई गई फसलों का इतिहास देखें", bgColor: "bg-blue-200", route: "/your-crops" },
-  { icon: <FaShoppingCart size={30} />, title: "Sell Crop", description: " बाजार ", bgColor: "bg-red-200", route: "/sell-product" }, 
+  { icon: <FaTractor size={30} />, title: "Your Crops", description: "पहले उगाई गई फसलों का इतिहास देखें", bgColor: "bg-blue-200", route: "/your-crops" },
+  {
+    title: "Sell & Buy Crop",
+    isSplit: true, // Flag to handle split layout
+    bgColor: "bg-red-200",
+    routes: ["/marketplace", "/buy-product"],
+  },
   { icon: <FaMoneyBillWave size={30} />, title: "Total Expenses", description: "खेती में कुल खर्च का ब्यौरा", bgColor: "bg-green-200", route: "/total-expenses" },
 ];
 
@@ -27,29 +32,48 @@ const news = [
 
 const Home = () => {
   const navigate = useNavigate();
-  const [showPopup, setShowPopup] = useState(false); 
+  const [showPopup, setShowPopup] = useState(false);
 
   return (
     <>
       <div className="p-6 ml-64 mt-20">
         <div className="grid grid-cols-2 gap-6">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className={`${feature.bgColor} border border-gray-300 p-6 rounded-lg shadow-md hover:bg-green-500 hover:text-white transition duration-300 cursor-pointer relative`}
-              onClick={() => {
-                if (feature.route === "popup") {
-                  setShowPopup(true); 
-                } else {
-                  navigate(feature.route);
-                }
-              }}
-            >
-              <div className="absolute top-3 left-3 text-gray-600">{feature.icon}</div>
-              <h3 className="text-lg font-semibold text-center mt-6">{feature.title}</h3>
-              <p className="text-sm text-center mt-2">{feature.description}</p>
-            </div>
-          ))}
+          {features.map((feature, index) =>
+            feature.isSplit ? (
+              <div key={index} className={`${feature.bgColor} border border-gray-300 p-6 rounded-lg shadow-md transition duration-300 flex`}>
+                <div
+                  className="w-1/2 flex flex-col items-center justify-center border-r border-gray-400 cursor-pointer hover:bg-green-500 hover:text-white"
+                  onClick={() => navigate(feature.routes[0])}
+                >
+                  <FaShoppingCart size={30} className="mb-2" />
+                  <h3 className="text-lg font-semibold text-center">Sell</h3>
+                </div>
+                <div
+                  className="w-1/2 flex flex-col items-center justify-center cursor-pointer hover:bg-green-500 hover:text-white"
+                  onClick={() => navigate(feature.routes[1])}
+                >
+                  <FaShoppingBag size={30} className="mb-2" />
+                  <h3 className="text-lg font-semibold text-center">Buy</h3>
+                </div>
+              </div>
+            ) : (
+              <div
+                key={index}
+                className={`${feature.bgColor} border border-gray-300 p-6 rounded-lg shadow-md hover:bg-green-500 hover:text-white transition duration-300 cursor-pointer relative`}
+                onClick={() => {
+                  if (feature.route === "popup") {
+                    setShowPopup(true);
+                  } else {
+                    navigate(feature.route);
+                  }
+                }}
+              >
+                <div className="absolute top-3 left-3 text-gray-600">{feature.icon}</div>
+                <h3 className="text-lg font-semibold text-center mt-6">{feature.title}</h3>
+                <p className="text-sm text-center mt-2">{feature.description}</p>
+              </div>
+            )
+          )}
         </div>
       </div>
 
