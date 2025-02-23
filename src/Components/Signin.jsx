@@ -26,7 +26,7 @@ function Signin() {
   
 
   const handleSubmit = async (e) => {
-     const API_URL = "https://prj-backend-git-main-prathameshkhandares-projects.vercel.app"
+     const API_URL = "https://prj-backend.vercel.app"
     e.preventDefault();
 
     try {
@@ -34,7 +34,7 @@ function Signin() {
 
       if (response.status === 200) {
         console.log("User login successfully");
-
+        login(response.data.user, response.data.token);
         setLoginData({
           email: "",
           password: "",
@@ -49,7 +49,7 @@ function Signin() {
       
 
        
-        login(response.data.user, response.data.token);
+       
       
        
         navigate('/');

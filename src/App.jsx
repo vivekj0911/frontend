@@ -1,26 +1,24 @@
-
-import './index.css'
-import {BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./Pages/PageIndex"
+import './index.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home"; 
 import CropList from "./Components/CropList"; 
-import {Navbar,Sidebar,Newspopup,Signin,Signup} from "./Components/CompIndex"
+import { AdminGetAllMerchants,AdminGetAllUsers,Adminhome,AmdinPostBlog,AdminUpdateMarketRate } from './OurAdminpanel/AdminComp';
+import {Navbar,News,Sidebar,Signin,Signup,Totalexpenses,UserGuide,Blog} from "./Components/CompIndex"
 import CropDetailsView from './Components/CropDetailsView'; 
-import AddCrop from './Pages/AddCrop'
-import UpdateActivity from './Components/UpdateActivity'
-import Expense from './Pages/ExpensePage'
-import Growth from './Components/Growth';
-import Customexpense from './Components/Customexpense';
-import ActivityLog from './Components/ActivityLog';
+import AddCrop from './Pages/AddCrop';
+import Chatbot from './Pages/Chatbot';
+import SellProduct from './Pages/SellProduct';
+// import {GetAllProducts,MerchantHome} from './Merchantpanel/Merchanindex';
+import GetAllProducts from './Pages/GetAllProducts';
+import BuyProducts from './Pages/BuyProducts';
+import Marketplace from './Pages/MarketPlace';
 function App() {
-
-
   return (
     <>
    
     
     <BrowserRouter>
-    <Navbar/>
-    <Sidebar/>
+    
       <Routes>
         <Route path='/' element={<><Home/> <Newspopup/></>}/>
         
@@ -39,9 +37,8 @@ function App() {
 
       </Routes>
       </BrowserRouter>
-      
     </>
-  )
+  );
 }
 
-export default App
+export default App;
