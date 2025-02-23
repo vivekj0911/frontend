@@ -59,8 +59,11 @@ const ConfirmOrder = () => {
                             key={tx._id}
                             className="border rounded-lg p-4 shadow-lg bg-white"
                         >
-                            <p className="text-lg font-semibold">Buyer: {tx.buyer}</p>
                             <p className="text-gray-600">Product: {tx.product}</p>
+                            <p className="text-lg font-semibold">Buyer name: {tx.buyer.firstName}</p>
+                            <p className="text-lg font-semibold">Buyer email: {tx.buyer.email}</p>
+                            <p className="text-lg font-semibold">Buyer phone: {tx.buyer.phone}</p>
+                            
                             <p className="text-gray-800 font-medium">Price: ₹{tx.price}</p>
                             <p className={`font-semibold ${tx.status === "pending" ? "text-yellow-500" : tx.status === "confirmed" ? "text-green-500" : "text-red-500"}`}>
                                 Status: {tx.status}

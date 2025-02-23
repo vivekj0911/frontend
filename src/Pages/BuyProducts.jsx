@@ -46,7 +46,8 @@ const BuyProduct = () => {
     try {
       const response = await axios.get(`${API_URL}/get-buyer-transactions`, {
         headers: { Authorization: `Bearer ${token}` },
-      });
+      })
+      console.log("data",response.data);
       setTransactions(response.data.transactions);
     } catch (error) {
       console.error("Error fetching transactions:", error);
@@ -155,32 +156,36 @@ const BuyProduct = () => {
             <p className="text-gray-500 text-center">No transactions found.</p>
           ) : (
             <div className="space-y-4">
-              {transactions.map((tx, index) => (
-                <div
-                  key={tx._id}
-                  className="p-4 bg-white rounded-lg shadow-sm border border-gray-200"
-                >
-                  <p className="text-lg font-semibold text-gray-800 flex items-center">
-                    {index + 1}. {tx.product} 🌱
-                  </p>
-                  <p className="text-gray-700">💰 Price: ₹{tx.price}</p>
-                  <p className="font-semibold text-sm mt-1">
-                    📜 Status:{" "}
-                    <span
-                      className={`px-2 py-1 rounded-md text-white ${
-                        tx.status === "pending"
-                          ? "bg-yellow-500"
-                          : tx.status === "confirmed"
-                          ? "bg-green-500"
-                          : "bg-red-500"
-                      }`}
-                    >
-                      {tx.status}
-                    </span>
-                  </p>
-                </div>
-              ))}
-            </div>
+            {transactions.map((tx, index) => (
+              <div
+                key={tx._id}
+                className="p-4 bg-white rounded-lg shadow-sm border border-gray-200"
+              >
+                <p className="text-lg font-semibold text-gray-800 flex items-center">
+                  {index + 1}. Transaction ID: {tx._id} 📜
+                </p>
+                <p className="text-gray-700">💰 Amount: ₹{tx.price}</p>
+          
+                {/* Seller Details */}
+                <p className="text-gray-700">
+  👤 Seller Name: {(tx.seller?.firstName )|| "N/A"}
+</p>
+<p className="text-gray-700">👤 Seller Email: {tx.seller?.email || "N/A"}</p>
+<p className="text-gray-700">📞 Seller Phone: {tx.seller?.phone || "N/A"}</p>
+
+          
+                <p className="font-semibold text-sm mt-1">
+                  📜 Status:{" "}
+                  <span
+                    className="px-2 py-1 rounded-md text-white bg-yellow-500"
+                  >
+                    Pending
+                  </span>
+                </p>
+              </div>
+            ))}
+          </div>
+          
           )}
         </div>
       </div>

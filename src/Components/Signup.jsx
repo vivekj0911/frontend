@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
     lastName: "",
     email: "",
     password: "",
+    phone: "",
   });
   const [successMessage, setSuccessMessage] = useState(""); 
 
@@ -33,6 +34,7 @@ import { useNavigate } from "react-router-dom";
           lastName: "",
           email: "",
           password: "",
+          phone: "",
         });
 
         setSuccessMessage("Registration successful! Redirecting to sign in...");
@@ -117,6 +119,18 @@ import { useNavigate } from "react-router-dom";
               onChange={handleOnChange}
               required
               placeholder="Password"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md bg-transparent focus:bg-transparent focus:bg-transparent focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div className="relative">
+            <input
+              type="phone"
+              id="phone"
+              name="phone"
+              value={registrationData.phone}
+              onChange={handleOnChange}
+              required
+              placeholder="Phone Number"
               className="w-full px-4 py-3 border border-gray-300 rounded-md bg-transparent focus:bg-transparent focus:bg-transparent focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
