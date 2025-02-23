@@ -13,7 +13,7 @@ import image5 from "../assets/images/fifth.jpeg";
 const features = [
   { icon: <FaSeedling size={30} />, title: "Add Crop", description: "आप नई फसल जोड़ सकते हैं", bgColor: "bg-yellow-200", route: "/add-crop" },
   { icon: <FaTractor size={30} />, title: "your Crops", description: "पहले उगाई गई फसलों का इतिहास देखें", bgColor: "bg-blue-200", route: "/your-crops" },
-  { icon: <FaShoppingCart size={30} />, title: "Market Live Rate", description: "सोयाबीन के बाजार भाव की लाइव जानकारी", bgColor: "bg-red-200", route: "popup" }, 
+  { icon: <FaShoppingCart size={30} />, title: "Sell Crop", description: " बाजार ", bgColor: "bg-red-200", route: "/sell-product" }, 
   { icon: <FaMoneyBillWave size={30} />, title: "Total Expenses", description: "खेती में कुल खर्च का ब्यौरा", bgColor: "bg-green-200", route: "/total-expenses" },
 ];
 
@@ -27,7 +27,7 @@ const news = [
 
 const Home = () => {
   const navigate = useNavigate();
-  const [showPopup, setShowPopup] = useState(false); // State for pop-up
+  const [showPopup, setShowPopup] = useState(false); 
 
   return (
     <>
@@ -39,7 +39,7 @@ const Home = () => {
               className={`${feature.bgColor} border border-gray-300 p-6 rounded-lg shadow-md hover:bg-green-500 hover:text-white transition duration-300 cursor-pointer relative`}
               onClick={() => {
                 if (feature.route === "popup") {
-                  setShowPopup(true); // Open pop-up for Market Rate
+                  setShowPopup(true); 
                 } else {
                   navigate(feature.route);
                 }

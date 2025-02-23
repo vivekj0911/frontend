@@ -7,6 +7,11 @@ import {Navbar,News,Sidebar,Signin,Signup,Totalexpenses,UserGuide,Blog} from "./
 import CropDetailsView from './Components/CropDetailsView'; 
 import AddCrop from './Pages/AddCrop';
 import Chatbot from './Pages/Chatbot';
+import SellProduct from './Pages/SellProduct';
+// import {GetAllProducts,MerchantHome} from './Merchantpanel/Merchanindex';
+import GetAllProducts from './Pages/GetAllProducts';
+import BuyProducts from './Pages/BuyProducts';
+import Marketplace from './Pages/MarketPlace';
 function App() {
   return (
     <>
@@ -35,6 +40,12 @@ function App() {
         <Route path="/update-market-rate" element={<AdminUpdateMarketRate />} />
         <Route path="/users" element={<AdminGetAllUsers />} />
         <Route path="/merchants" element={<AdminGetAllMerchants />} />
+
+        {/* <Route path='/merchanthome' element={<MerchantHome/>}/> */}
+        <Route path='/get-all-products' element={<GetAllProducts/>}/>
+        <Route path='/sell-product' element={<SellProduct/>}/>
+        <Route path='/buy-product' element={<BuyProducts/>}/>
+        <Route path='/marketplace' element={<Marketplace/>}/>
       
 
       </Routes>

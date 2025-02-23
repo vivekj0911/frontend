@@ -1,3 +1,5 @@
 import Home from "./Home"
 import Chatbot from "./Chatbot"
-export { Home, Chatbot }
+import GetAllProducts from "./GetAllProducts"
+import SellProduct from "./SellProduct"
+export { Home, Chatbot ,GetAllProducts }
